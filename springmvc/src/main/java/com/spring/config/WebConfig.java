@@ -8,6 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -31,6 +33,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
         resolver.setExposeContextBeansAsAttributes(true);
         return resolver;
     }
+
 
     @Override
     protected void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -63,5 +66,10 @@ public class WebConfig extends WebMvcConfigurationSupport {
     @Bean
     public PropertyNamingStrategy lowerCaseWithUnderscoresStrategy() {
         return PropertyNamingStrategy.LOWER_CASE;
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver(){
+        return  new StandardServletMultipartResolver();
     }
 }
